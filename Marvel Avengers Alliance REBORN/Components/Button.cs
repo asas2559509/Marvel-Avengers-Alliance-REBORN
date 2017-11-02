@@ -16,7 +16,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         private MouseState currentMouse;
         private MouseState previousMouse;
         private bool isPointed;
-
+        private int margin = 5;
         public event EventHandler Click;
         #endregion
 
@@ -28,6 +28,14 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                 return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
             }
         }
+
+        public Rectangle MarginRectangle
+        {
+            get
+            {
+                return new Rectangle((int)Position.X + margin, (int)Position.Y + margin, _texture.Width - (margin * 2), _texture.Height - (margin * 2));
+            }
+        }
         #endregion
 
         public override void LoadContent(ContentManager content, string asset)
@@ -37,10 +45,10 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            var color = Color.White;
+            var color = Color.DarkGray;
 
             if (isPointed)
-                color = Color.LightYellow;
+                color = Color.White;
 
             spriteBatch.Draw(_texture, Rectangle, color);
         }
@@ -54,7 +62,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
             isPointed = false;
 
-            if (mouseRectangle.Intersects(Rectangle))
+            if (mouseRectangle.Intersects(MarginRectangle))
             {
                 isPointed = true;
 

@@ -1,4 +1,5 @@
-﻿using Marvel_Avengers_Alliance_REBORN.Models;
+﻿using Marvel_Avengers_Alliance_REBORN.DATA;
+using Marvel_Avengers_Alliance_REBORN.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -43,7 +44,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
             _cur_value = max_value;
             _bar_width = MAX_WIDTH;
 
-            LoadContent(content, "Character/Gadget/" + _type);
+            LoadContent(content, "Component/" + _type);
         }
 
         public void Set_Value(int cur_value)
@@ -58,7 +59,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
 
         public override void LoadContent(ContentManager content, string asset)
         {
-            //_texture = content.Load<Texture2D>("Character/Agent/" + asset);
+            _texture = content.Load<Texture2D>(asset);
             Calibri = Conso = content.Load<SpriteFont>("Fonts/Calibri");
             Conso = content.Load<SpriteFont>("Fonts/Conso");
         }
@@ -68,13 +69,18 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
             _bar_width = (_cur_value * MAX_WIDTH) / _max_value;
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             var color = Color.White;
             
             spriteBatch.Draw(_texture, new Rectangle(Convert.ToInt32(Position.X) + 43, Convert.ToInt32(Position.Y), _bar_width, MAX_HEIGHT), Color.White);
             spriteBatch.DrawString(Calibri, _type + "                                          " + (_cur_value).ToString(), Position, Color.White);
-            spriteBatch.DrawString(Conso, _hero_name + "", new Vector2(Position.X + 160, Position.Y + 2), Color.White);
+            if(_type is Gadget.HEALTH) spriteBatch.DrawString(Conso, _hero_name + "", new Vector2(Position.X + 160, Position.Y + 2), Color.White);
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            throw new NotImplementedException();
         }
     }
 }

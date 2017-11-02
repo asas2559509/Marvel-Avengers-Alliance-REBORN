@@ -11,23 +11,24 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
 {
     class SkillButton : Button
     {
-        Skill skill;
-        private string btn_name;
+        private Skill _skill;
+        private Texture2D _skill_texture;
 
-        public SkillButton(ContentManager content, string hero_name, string uniform_name, string skill_name)
+        public SkillButton(ContentManager content, string hero_name, string uniform_name, Skill skill)
         {
-            btn_name = skill_name;
-            LoadContent(content,"Character/" + hero_name + "/" + uniform_name + "/" + skill_name);
+            _skill = skill;
+            LoadContent(content,"Character/" + hero_name + "/" + uniform_name + "/" + skill.Get_Name());
+            _skill_texture = content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + "Sprite_" + skill.Get_Name());
         }
 
         public Skill Get_Skill()
         {
-            return skill;
+            return _skill;
         }
 
-        public string Get_Name()
+        public SkillButton Get_me()
         {
-            return btn_name;
+            return this;
         }
     }
 }

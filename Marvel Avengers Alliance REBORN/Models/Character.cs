@@ -27,10 +27,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected _Class _class;
 
         protected List<SkillButton> _skill_buttons = new List<SkillButton>();
-        protected List<Character> _targets = new List<Character>();
         protected Sprite _sprite;
 
-        public Skill cur_skill;
+        protected Skill _cur_skill;
+        public List<Character> _targets = new List<Character>();
+        public bool isPickSkill;
         public StatusBar _hp_bar;
         public StatusBar _sp_bar;
         public EventHandler Click;
@@ -113,17 +114,29 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         {
             return _skill_buttons;
         }
+
+        public Skill Get_Cur_Skill()
+        {
+            return _cur_skill;
+        }
         #endregion
 
         #region Set Function
-        public void Load_Sprite(ContentManager content, string hero_name, string uniform_name)
+        public void Set_Sprite_HasTarget(bool logic)
         {
-            _sprite = new Sprite(content, hero_name, uniform_name);
+            _sprite.Set_HasTarget(logic);
         }
+
+        public void Set_Cur_Skill(Skill cur_skill)
+        {
+            _cur_skill = cur_skill;
+        }
+
         public void Set_Sprite_Position(Vector2 vector)
         {
             _sprite.Position = vector;
         }
+
         public void Set_Sprite_Focus(bool logic)
         {
             _sprite.Set_IsFocus(logic);
@@ -132,11 +145,13 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public void Set_Health(int cur_health)
         {
             _cur_health = cur_health;
+            _hp_bar.Set_Value(_cur_health);
         }
 
         public void Set_Stamina(int cur_stamina)
         {
             _cur_stamina = cur_stamina;
+            _sp_bar.Set_Value(_cur_stamina);
         }
 
         public void Set_Attack(int attack)
@@ -171,11 +186,24 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #endregion
 
         #region Order Function
+        public void Skill_Action(ContentManager content)
+        {
+            _sprite.ChangeTexture(content.Load<Texture2D>("Character/" + name + "/" + alternate_uniform + "/" + "Sprite_" + _cur_skill.Get_Name()), 15, _cur_skill.Get_Time());
+        }
+
+        public void Load_Sprite(ContentManager content, string hero_name, string uniform_name)
+        {
+            _sprite = new Sprite(content, hero_name, uniform_name);
+        }
+
         public void Draw_Sprite(GameTime gameTime, SpriteBatch spriteBatch)
         {
             _sprite.DrawFrame(spriteBatch);
-            foreach (var btnskill in _skill_buttons)
-                btnskill.Draw(gameTime, spriteBatch);
+            if (_sprite.Get_Sprite_Focus())
+            {
+                foreach (var btnskill in _skill_buttons)
+                    btnskill.Draw(gameTime, spriteBatch);
+            }
         }
 
         public void Update_Sprite_Frame(GameTime gameTime, float elapsed)

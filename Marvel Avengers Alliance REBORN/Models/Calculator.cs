@@ -48,24 +48,24 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         {
             foreach(var target in objects)
             {
-                int total_damage = rand.Next(subject.cur_skill.Get_Damage()[0], subject.cur_skill.Get_Damage()[1]) + subject.Get_Attack() - target.Get_Defense();
+                int total_damage = rand.Next(subject.Get_Cur_Skill().Get_Damage()[0], subject.Get_Cur_Skill().Get_Damage()[1]) + subject.Get_Attack() - target.Get_Defense();
 
                 if (total_damage < 0) total_damage = 0;
 
                 target.Set_Health(target.Get_Health() - total_damage);
 
-                target._hp_bar.Set_Value(target.Get_Health());
+                target.Set_Health(target.Get_Health());
             }
             NotifyAll();
         }
 
         public void StaminaCalculate(Character actor)
         {
-            int stamina_cost = (actor.cur_skill.Get_StaminaCost() * actor.Get_Max_Stamina()) / 100;
+            int stamina_cost = (actor.Get_Cur_Skill().Get_StaminaCost() * actor.Get_Max_Stamina()) / 100;
 
             actor.Set_Stamina(actor.Get_Stamina() - stamina_cost);
 
-            actor._sp_bar.Set_Value(actor.Get_Stamina());
+            actor.Set_Stamina(actor.Get_Stamina());
 
             NotifyAll();
         }

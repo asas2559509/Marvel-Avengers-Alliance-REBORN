@@ -39,7 +39,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             skill.Set_Hits_Chance(88);
             skill.Set_Cri_Chance(11);
 
-            SkillButton btnskill = new SkillButton(content, name, alternate_uniform, skill.Get_Name());
+            SkillButton btnskill = new SkillButton(content, name, alternate_uniform, skill);
 
             _skill_buttons.Add(btnskill);
             #endregion
@@ -55,7 +55,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             skill.Set_Hits_Chance(100);
             skill.Set_Cri_Chance(60);
 
-            btnskill = new SkillButton(content, name, alternate_uniform, skill.Get_Name());
+            btnskill = new SkillButton(content, name, alternate_uniform, skill);
 
             _skill_buttons.Add(btnskill);
             #endregion
@@ -71,7 +71,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             skill.Set_Hits_Chance(88);
             skill.Set_Cri_Chance(11);
 
-            btnskill = new SkillButton(content, name, alternate_uniform, skill.Get_Name());
+            btnskill = new SkillButton(content, name, alternate_uniform, skill);
 
             _skill_buttons.Add(btnskill);
             #endregion
@@ -87,7 +87,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             skill.Set_Hits_Chance(100);
             skill.Set_Cri_Chance(60);
 
-            btnskill = new SkillButton(content, name, alternate_uniform, skill.Get_Name());
+            btnskill = new SkillButton(content, name, alternate_uniform, skill);
 
             _skill_buttons.Add(btnskill);
             #endregion

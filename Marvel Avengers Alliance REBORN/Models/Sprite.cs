@@ -35,7 +35,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected MouseState _currentMouse;
         protected MouseState _previousMouse;
         public event EventHandler Click;
-        protected SpriteSortMode _loc;
         
         #endregion
 
@@ -64,7 +63,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         {
             get
             {
-                return new Rectangle((int)_cur_position.X + (_frame_width / 2) - 15, (int)_cur_position.Y + ((_frame_height / 3)) + 80, _frame_width / 2, (_frame_height / 4) - 5);
+                return new Rectangle((int)_cur_position.X + (_frame_width / 2) - 65, (int)_cur_position.Y + ((_frame_height / 3)) + 80, _frame_width / 2, (_frame_height / 4) - 5);
             }
         }
 
@@ -85,10 +84,10 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
             _was_hit_texture = content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + (uniform_name + "_was_Hit"));
 
-            for (int i = 1; i <= 4; i++)
+            /*for (int i = 1; i <= 4; i++)
             {
-                _skill_texture.Add(content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/Skill_" + i));
-            }
+                _skill_texture.Add(content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/Sprite_" + "Ant-Man-Break_In"));
+            }*/
         }
 
         public void ChangeTexture(Texture2D texture, int frame_per_sec, int time_cast)
@@ -106,6 +105,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         }
 
         #region Set Function
+        public void Set_HasTarget(bool logic)
+        {
+            hasTarget = logic;
+        }
+
         public void Set_IsFocus(bool logic)
         {
             isFocus = logic;
@@ -133,6 +137,10 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #endregion
 
         #region Get Function
+        public bool Get_Sprite_Focus()
+        {
+            return isFocus;
+        }
 
         public int Get_Sprite_Height()
         {
@@ -183,7 +191,8 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         
         public void UpdateFrame(float elapsed)
         {
-            //_Depth = -1 + ((Position.Y + _frame_height + 100) / 100);
+            _Depth = ((Position.Y*(-1)) / 200) + 0.5f;
+            //if(_cur_frame % 60 == 29) Console.Out.WriteLine(Position.Y + "has Dept = " + _Depth);
 
             #region Mouse Cast
             _previousMouse = _currentMouse;
@@ -239,14 +248,10 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
                 if (!isAttacking) _cur_position = Position;
 
-                foreach (var target in _targets)
-                {
-                    if (wasAttacked) ChangeTexture(_was_hit_texture, 1, 1);
-                    else ChangeTexture(_main_texture, 15, 4);
-                }
+                if (wasAttacked) ChangeTexture(_was_hit_texture, 1, 1);
 
                 //Set Back Main
-                if (isAttacking && _cur_column == _frame_per_sec * _time_cast)
+                if (isAttacking && _cur_frame == _frame_per_sec * _time_cast)
                 {
                     ChangeTexture(_main_texture, 15, 4);
                     isAttacking = false;
@@ -290,8 +295,8 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
             _TotalElapsed -= _timePerFrame;
         }*/
-    }
-
+        }
+       
         public void DrawFrame(SpriteBatch spriteBatch)
         {
             if (Position.X < MAAGame.SCREEN_WIDTH / 2) DrawFrame(spriteBatch, _cur_column, _cur_row);
