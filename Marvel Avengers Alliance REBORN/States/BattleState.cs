@@ -18,8 +18,6 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         public const int ONE_PLAYER = 1;
         public const int TWO_PLAYER = 2;
 
-        Calculator engine;
-
         #region Game Fields
         private List<Character> heroes;
         private List<MenuButton> menu_component;
@@ -209,6 +207,12 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             foreach (var avatar in heroes)
             {
+                if (avatar.Get_Sprite().Get_IsDead())
+                {
+                    heroes.Remove(avatar);
+                    break;
+                }
+
                 avatar.Update_Sprite_Frame(gameTime, elapsed);
                 avatar._hp_bar.Update(gameTime);
                 avatar._sp_bar.Update(gameTime);
@@ -226,7 +230,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin(sortMode:SpriteSortMode.BackToFront);
-            
+
             combat_background.Draw(spriteBatch);
 
             empty_status_bar.Draw(spriteBatch);

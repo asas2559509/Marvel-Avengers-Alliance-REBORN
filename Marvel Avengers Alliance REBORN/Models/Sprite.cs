@@ -42,7 +42,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected float _Rotation = 0;
         protected float _Scale = 1;
         protected float _Depth = 0;
-        protected Vector2 _cur_position;
+        public Vector2 _cur_position;
         protected Vector2 _rotate_point;
         protected Vector2 _velocity;
         #endregion
@@ -167,6 +167,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             return isFocus;
         }
 
+        public bool Get_IsDead()
+        {
+            return isDead;
+        }
+
         public bool Get_HasTarget()
         {
             return hasTarget;
@@ -253,20 +258,14 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
             #region ReachTarget
 
-            wasAttacked = false;
-
             isReachTarget = false;
 
             if (hasTarget)
             {
                 var targetRectangle = new Rectangle((int)_targets[0].Position.X, (int)_targets[0].Position.Y, _frame_width / 2, _frame_height / 2);
-                
+
                 if (targetRectangle.Intersects(Rectangle) && hasTarget)
                 {
-                    foreach (var target in _targets)
-                    {
-                        target.Set_WasAttacked(true);
-                    }
                     isReachTarget = true;
                 }
             }
@@ -288,32 +287,37 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                 if (!hasTarget)
                 {
                     _cur_position = Position;
-                    //ChangeTexture(_main_texture, 15, 4);
                 }
                 else
                 {
                     _mychar.Check_Skill();
                     Calculator engine = new Calculator();
-                    if (isReachTarget && isHealthCalculated) engine.HeathCalculate(this, _targets);
+                    if (isHealthCalculated)
+                    {
+                        engine.HeathCalculate(this, _targets);
+                    }
+
+                    if (isReachTarget)
+                    {
+                        foreach (var target in _targets)
+                        {
+                            target.ChangeTexture(_was_hit_texture, 1, 1);
+                        }
+                    }
+                    
                     if(isStaminaCalculated) engine.StaminaCalculate(this);
                     isReachTarget = false;
                 }
-
-                if (isReachTarget)
-                {
-                    Calculator engine = new Calculator();
-                    engine.HeathCalculate(this, _targets);
-                }
-
-                if (wasAttacked) ChangeTexture(_was_hit_texture, 1, 1);
 
                 //Set Back Main
                 if (hasTarget && _cur_frame == _frame_per_sec * _time_cast)
                 {
                     ChangeTexture(_main_texture, 15, 4);
+                    foreach (var target in _targets)
+                    {
+                        target.ChangeTexture(_main_texture, 15, 4);
+                    }
                     hasTarget = false;
-                    //foreach (var target in _targets)
-                        //target.ChangeTexture(_main_texture, 15, 4);
                     _targets = new List<Sprite>();
                     isFocus = false;
                 }

@@ -99,7 +99,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                         Vector2 goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 2) - 100, _sprite.Get_Targets()[0].Position.Y - 50);
                         _sprite.Transition(_sprite.Position, goal, 11, 5);
 
-                        _sprite.Transition(goal, _sprite.Position, 36, 5);
+                        _sprite.Transition(goal, _sprite.Position, 35, 5);
 
                         if (_sprite.Get_Cur_Frame() == 17) _sprite.Set_isHealth_Calculated(true);
                         else _sprite.Set_isHealth_Calculated(false);
