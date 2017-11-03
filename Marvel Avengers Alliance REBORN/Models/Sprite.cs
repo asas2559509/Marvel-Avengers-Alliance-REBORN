@@ -51,12 +51,13 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected Texture2D _main_texture;
         protected Texture2D _was_hit_texture;
         protected List<Texture2D> _skill_texture;
-        protected bool isAttacking;
+        //protected bool isAttacking;
         protected bool isDead;
         protected bool hasTarget;
         protected bool wasAttacked;
         protected bool isReachTarget;
         protected List<Sprite> _targets;
+        protected Character _mychar;
         #endregion
 
         public Rectangle Rectangle
@@ -105,6 +106,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         }
 
         #region Set Function
+        public void Set_MyChar(Character mychar)
+        {
+            _mychar = mychar;
+        }
+
         public void Set_HasTarget(bool logic)
         {
             hasTarget = logic;
@@ -115,10 +121,10 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             isFocus = logic;
         }
 
-        public void Set_IsAttacking(bool logic)
+        /*public void Set_IsAttacking(bool logic)
         {
             isAttacking = logic;
-        }
+        }*/
 
         public void Set_IsDead(bool logic)
         {
@@ -137,9 +143,29 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #endregion
 
         #region Get Function
+        public Sprite Get_Me()
+        {
+            return this;
+        }
+
+        public Character Get_Char()
+        {
+            return _mychar;
+        }
+
         public bool Get_Sprite_Focus()
         {
             return isFocus;
+        }
+
+        public bool Get_HasTarget()
+        {
+            return hasTarget;
+        }
+
+        public List<Sprite> Get_Targets()
+        {
+            return _targets;
         }
 
         public int Get_Sprite_Height()
@@ -182,13 +208,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         }
         #endregion
 
-        #region Animation Editor
-        /*public abstract void Animating_Skill_1st();
-        public abstract void Animating_Skill_2nd();
-        public abstract void Animating_Skill_3rd();
-        public abstract void Animating_Skill_4th();*/
-        #endregion
-        
         public void UpdateFrame(float elapsed)
         {
             _Depth = ((Position.Y*(-1)) / 200) + 0.5f;
@@ -223,7 +242,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             {
                 var targetRectangle = new Rectangle((int)_targets[0].Position.X, (int)_targets[0].Position.Y, _frame_width / 2, _frame_height / 2);
                 
-                if (targetRectangle.Intersects(Rectangle) && isAttacking)
+                if (targetRectangle.Intersects(Rectangle) && hasTarget)
                 {
                     foreach (var target in _targets)
                     {
@@ -240,23 +259,34 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             _TotalElapsed += elapsed;
 
             _cur_frame = (_frame_per_sec * _cur_row) + _cur_column + 1;
+            Console.Out.WriteLine(_cur_frame);
 
             if (_TotalElapsed > _timePerFrame)
             {
                 _cur_column++;
                 if (_cur_column == _frame_per_sec) _cur_row++;
 
-                if (!isAttacking) _cur_position = Position;
+                if (!hasTarget)
+                {
+                    _cur_position = Position;
+                    //ChangeTexture(_main_texture, 15, 4);
+                }
+
+                if (isReachTarget)
+                {
+                    Calculator engine = new Calculator();
+                    engine.HeathCalculate(this, _targets);
+                }
 
                 if (wasAttacked) ChangeTexture(_was_hit_texture, 1, 1);
 
                 //Set Back Main
-                if (isAttacking && _cur_frame == _frame_per_sec * _time_cast)
+                if (hasTarget && _cur_frame == _frame_per_sec * _time_cast)
                 {
                     ChangeTexture(_main_texture, 15, 4);
-                    isAttacking = false;
-                    foreach (var target in _targets)
-                        target.ChangeTexture(_main_texture, 15, 4);
+                    hasTarget = false;
+                    //foreach (var target in _targets)
+                        //target.ChangeTexture(_main_texture, 15, 4);
                     _targets = new List<Sprite>();
                     isFocus = false;
                 }
@@ -265,36 +295,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                 _cur_row = _cur_row % _time_cast;
                 _TotalElapsed -= _timePerFrame;
             }
-        
-
-        /*_TotalElapsed += elapsed;
-
-        _cur_frame = (_frame_per_sec * _cur_row) + _cur_column;
-
-        if (_TotalElapsed > _timePerFrame)
-        {
-            if (!isAttacking)
-            {
-                _cur_position = Position;
-            }
-
-            if (wasAttacked) _cur_texture = _was_hit_texture;
-
-            //Set Back Main
-            if (!isAttacking && (_cur_column * _cur_row) == (_frame_per_sec * _time_cast))
-            {
-                _cur_texture = _main_texture;
-            }
-
-            //Matrix Frame
-            if (_cur_column == _frame_per_sec) _cur_row++;
-            _cur_column++;
-
-            _cur_column %= _frame_per_sec;
-            _cur_row %= _time_cast;
-
-            _TotalElapsed -= _timePerFrame;
-        }*/
         }
        
         public void DrawFrame(SpriteBatch spriteBatch)
@@ -324,7 +324,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #region Motion Fuction
         public void Transition(Vector2 initial, Vector2 final, int startframe, int number_of_frame)
         {
-            if (isAttacking && _cur_frame > startframe && _cur_frame < startframe + number_of_frame)
+            if (hasTarget && _cur_frame > startframe && _cur_frame < startframe + number_of_frame)
             {
                 _velocity.X = (final.X - initial.X) / number_of_frame;
                 _velocity.Y = (final.Y - initial.Y) / number_of_frame;

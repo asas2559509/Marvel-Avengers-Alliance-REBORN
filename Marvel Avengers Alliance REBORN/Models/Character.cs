@@ -26,20 +26,33 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected int _evasion;
         protected _Class _class;
 
-        protected List<SkillButton> _skill_buttons = new List<SkillButton>();
+        protected List<SkillButton> _skills_buttons;
+        //protected List<Sprite> _target;
+        protected List<Skill> _skills;
         protected Sprite _sprite;
-
         protected Skill _cur_skill;
-        public List<Character> _targets = new List<Character>();
-        public bool isPickSkill;
+        
+        public bool isPickSkill = false;
         public StatusBar _hp_bar;
         public StatusBar _sp_bar;
-        public EventHandler Click;
 
         //public Vector2 Position { get; set; }
         #endregion
 
+        /*public abstract void Animating_Skill_1st();
+
+        public abstract void Animating_Skill_2nd();
+
+        public abstract void Animating_Skill_3rd();
+
+        public abstract void Animating_Skill_4th();*/
+
         #region Get Function
+        public Sprite Get_Sprite()
+        {
+            return _sprite;
+        }
+
         public int Get_Sprite_Height()
         {
             return _sprite.Get_Sprite_Height();
@@ -104,24 +117,34 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         {
             return _class;
         }
-
-        public Character Get_Me()
+        
+        public List<Skill> Get_Skills()
         {
-            return this;
+            return _skills;
         }
 
-        public List<SkillButton> Get_SkillButton()
+        public List<SkillButton> Get_Skills_Button()
         {
-            return _skill_buttons;
+            return _skills_buttons;
         }
 
         public Skill Get_Cur_Skill()
         {
             return _cur_skill;
         }
+
+        public bool Get_Sprite_HasTarget()
+        {
+            return _sprite.Get_HasTarget();
+        }
         #endregion
 
         #region Set Function
+        public void Add_Skill_Button(SkillButton btnskill)
+        {
+            _skills_buttons.Add(btnskill);
+        }
+
         public void Set_Sprite_HasTarget(bool logic)
         {
             _sprite.Set_HasTarget(logic);
@@ -179,9 +202,9 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             this._class = _class;
         }
 
-        public void Set_Target(List<Character> targets)
+        public void Set_Target(List<Sprite> targets)
         {
-            _targets = targets;
+            _sprite.Set_Targets(targets);
         }
         #endregion
 
@@ -189,28 +212,25 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public void Skill_Action(ContentManager content)
         {
             _sprite.ChangeTexture(content.Load<Texture2D>("Character/" + name + "/" + alternate_uniform + "/" + "Sprite_" + _cur_skill.Get_Name()), 15, _cur_skill.Get_Time());
+            //Check_Skill();
         }
+
+        //public abstract void Check_Skill();
 
         public void Load_Sprite(ContentManager content, string hero_name, string uniform_name)
         {
             _sprite = new Sprite(content, hero_name, uniform_name);
+            _sprite.Set_MyChar(this);
         }
 
         public void Draw_Sprite(GameTime gameTime, SpriteBatch spriteBatch)
         {
             _sprite.DrawFrame(spriteBatch);
-            if (_sprite.Get_Sprite_Focus())
-            {
-                foreach (var btnskill in _skill_buttons)
-                    btnskill.Draw(gameTime, spriteBatch);
-            }
         }
 
         public void Update_Sprite_Frame(GameTime gameTime, float elapsed)
         {
             _sprite.UpdateFrame(elapsed);
-            foreach (var btnskill in _skill_buttons)
-                btnskill.Update(gameTime);
         }
         #endregion
 

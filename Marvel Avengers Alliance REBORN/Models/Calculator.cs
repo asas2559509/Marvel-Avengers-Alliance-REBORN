@@ -44,28 +44,28 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             BarObserver.Add(bar);
         }
 
-        public void HeathCalculate(Character subject, List<Character> objects)
+        public void HeathCalculate(Sprite subject, List<Sprite> objects)
         {
             foreach(var target in objects)
             {
-                int total_damage = rand.Next(subject.Get_Cur_Skill().Get_Damage()[0], subject.Get_Cur_Skill().Get_Damage()[1]) + subject.Get_Attack() - target.Get_Defense();
+                int total_damage = rand.Next(subject.Get_Char().Get_Cur_Skill().Get_Damage()[0], subject.Get_Char().Get_Cur_Skill().Get_Damage()[1]) + subject.Get_Char().Get_Attack() - target.Get_Char().Get_Defense();
 
                 if (total_damage < 0) total_damage = 0;
 
-                target.Set_Health(target.Get_Health() - total_damage);
+                target.Get_Char().Set_Health(target.Get_Char().Get_Health() - total_damage);
 
-                target.Set_Health(target.Get_Health());
+                target.Get_Char().Set_Health(target.Get_Char().Get_Health());
             }
             NotifyAll();
         }
 
-        public void StaminaCalculate(Character actor)
+        public void StaminaCalculate(Sprite actor)
         {
-            int stamina_cost = (actor.Get_Cur_Skill().Get_StaminaCost() * actor.Get_Max_Stamina()) / 100;
+            int stamina_cost = (actor.Get_Char().Get_Cur_Skill().Get_StaminaCost() * actor.Get_Char().Get_Max_Stamina()) / 100;
 
-            actor.Set_Stamina(actor.Get_Stamina() - stamina_cost);
+            actor.Get_Char().Set_Stamina(actor.Get_Char().Get_Stamina() - stamina_cost);
 
-            actor.Set_Stamina(actor.Get_Stamina());
+            actor.Get_Char().Set_Stamina(actor.Get_Char().Get_Stamina());
 
             NotifyAll();
         }

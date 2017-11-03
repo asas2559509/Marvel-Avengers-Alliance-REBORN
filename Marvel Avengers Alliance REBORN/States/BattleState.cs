@@ -47,8 +47,6 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         {
             Set_Windows_size(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-            engine = new Calculator();
-
             combat_background = new Background();
             empty_status_bar = new Background();
             turn_bar = new Background();
@@ -104,9 +102,10 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 for(int j = 0; j < 4; j++)
                 {
-                    heroes[i].Get_SkillButton()[j] = new SkillButton(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform(), heroes[i].Get_SkillButton()[j].Get_Skill());
-                    heroes[i].Get_SkillButton()[j].Position = new Vector2(((combat_background.Get_Width() - heroes[i].Get_SkillButton()[j].Get_Width()) / 2) + ((j - 4) * (heroes[i].Get_SkillButton()[j].Get_Width() + 8)) + (heroes[i].Get_SkillButton()[j].Get_Width() / 2), 496);
-                    heroes[i].Get_SkillButton()[j].Click += BtnAttack_was_Clicked;
+                    var btnskill = new SkillButton(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform(), heroes[i].Get_Skills()[j]);
+                    btnskill.Position = new Vector2(((combat_background.Get_Width() - btnskill.Get_Width()) / 2) + ((j - 4) * (btnskill.Get_Width() + 8)) + (btnskill.Get_Width() / 2), 496);
+                    btnskill.Click += BtnAttack_was_Clicked;
+                    heroes[i].Add_Skill_Button(btnskill);
                 }
                 heroes[i]._hp_bar = new StatusBar(heroes[i].Get_Name(), heroes[i].Get_Max_Health(),Gadget.HEALTH, Content);
                 if (i % 2 == 0) heroes[i]._hp_bar.Position = new Vector2(7, SCREEN_HEIGHT - 72 + (i * 12));
@@ -118,7 +117,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 heroes[i].Load_Sprite(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform());
                 if(i % 2 == 0) heroes[i].Set_Sprite_Position(new Vector2(-(i * 10), (i * 50) - (heroes[i].Get_Sprite_Height() + 100)));
                 else heroes[i].Set_Sprite_Position(new Vector2(495 + (i * 10), ((i - 1) * 50) - (heroes[i].Get_Sprite_Height() + 100)));
-                heroes[i].Click += Char_was_Clicked;
+                heroes[i].Get_Sprite().Click += Char_was_Clicked;
             }
             
             heroes[cur_turn].Set_Sprite_Focus(true);
@@ -153,30 +152,37 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             }
         }
 
-        SkillButton cur_btn;
-
         private void BtnAttack_was_Clicked(object sender, EventArgs e)
         {
+            if (heroes[cur_turn].Get_Sprite_HasTarget()) return;
             heroes[cur_turn].Set_Cur_Skill(((SkillButton)sender).Get_Skill());
+            Console.Out.WriteLine("Skill " + ((SkillButton)sender).Get_Skill().Get_Name()  + " of " + heroes[cur_turn].Get_Name() + " was Clicked");
             heroes[cur_turn].isPickSkill = true;
-            Console.Out.WriteLine("Click " + ((SkillButton)sender).Get_Skill().Get_Name());
         }
 
         private void Char_was_Clicked(object sender, EventArgs e)
         {
+            //heroes[cur_turn].Set_Sprite_HasTarget(false);
+
             if (!heroes[cur_turn].isPickSkill) return;
+
+            List<Sprite> targets = new List<Sprite>();
 
             if (heroes[cur_turn].Get_Cur_Skill().Get_NumberOfTargets() == TargetType.One_Enemy)
             {
-                heroes[cur_turn]._targets.Add(((Character)sender).Get_Me());
+                targets.Add(((Sprite)sender).Get_Me());
+                Console.Out.WriteLine(targets[0].Get_Char().Get_Name() + " was Selected");
             }
             else
             {
                 for(int i = 0; i < heroes.Count; i++)
                 {
-                    if(i % 2 == 1) heroes[cur_turn]._targets.Add(heroes[i]);
+                    targets.Add(heroes[i].Get_Sprite());
+                    if (i % 2 == 1) heroes[cur_turn].Set_Target(targets);
                 }
             }
+            heroes[cur_turn].Set_Target(targets);
+
             heroes[cur_turn].Skill_Action(Content);
 
             heroes[cur_turn].Set_Sprite_HasTarget(true);
@@ -207,8 +213,11 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 avatar._hp_bar.Update(gameTime);
                 avatar._sp_bar.Update(gameTime);
             }
+            
+            foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())
+                btnskill.Update(gameTime);
 
-                foreach (var btn in menu_component)
+            foreach (var btn in menu_component)
                 btn.Update(gameTime);
 
             base.Update(gameTime);
@@ -231,6 +240,9 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 avatar._hp_bar.Draw(spriteBatch);
                 avatar._sp_bar.Draw(spriteBatch);
             }
+
+            foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())
+                btnskill.Draw(gameTime, spriteBatch);
 
             turn_bar.Draw(spriteBatch);
 

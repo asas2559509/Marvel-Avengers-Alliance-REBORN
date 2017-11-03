@@ -13,10 +13,10 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
     abstract class Button : Component
     {
         #region Field
-        private MouseState currentMouse;
-        private MouseState previousMouse;
-        private bool isPointed;
-        private int margin = 5;
+        protected MouseState currentMouse;
+        protected MouseState previousMouse;
+        protected bool isPointed;
+        protected int margin = 5;
         public event EventHandler Click;
         #endregion
 

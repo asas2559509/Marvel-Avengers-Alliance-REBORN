@@ -23,7 +23,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #region Construcktor Function
         public Skill(string name)
         {
-            this._skill_name = name;
+            _skill_name = name;
 
         }
         #endregion
