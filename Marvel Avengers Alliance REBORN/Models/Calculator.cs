@@ -53,8 +53,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                 if (total_damage < 0) total_damage = 0;
 
                 target.Get_Char().Set_Health(target.Get_Char().Get_Health() - total_damage);
-
-                target.Get_Char().Set_Health(target.Get_Char().Get_Health());
             }
             NotifyAll();
         }
