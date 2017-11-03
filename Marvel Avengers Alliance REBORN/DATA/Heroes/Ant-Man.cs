@@ -89,7 +89,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         }
 
         #region Animation Editor
-        /*public override void Animating_Skill_1st()
+        public override void Animating_Skill_1st()
         {
             Vector2 goal = new Vector2(Get_Sprite().Get_Targets()[0].Position.X - (Get_Sprite().Get_Targets()[0].Get_Sprite_Width() / 8), Get_Sprite().Get_Targets()[0].Position.Y);
             Get_Sprite().Transition(Get_Sprite().Position, goal, 1, 20);
@@ -115,10 +115,10 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             Vector2 goal = new Vector2(Get_Sprite().Get_Targets()[0].Position.X - (Get_Sprite().Get_Targets()[0].Get_Sprite_Width() / 8), Get_Sprite().Get_Targets()[0].Position.Y);
             Get_Sprite().Transition(Get_Sprite().Position, goal, 1, 20);
             Get_Sprite().Transition(goal, Get_Sprite().Position, 50, 25);
-        }*/
+        }
         #endregion
 
-        /*public void Check_Skill()
+        public override void Check_Skill()
         {
             switch (_cur_skill.Get_Name())
             {
@@ -143,6 +143,6 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                         break;
                     }
             }
-        }*/
+        }
     }
 }
