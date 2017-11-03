@@ -51,11 +51,12 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected Texture2D _main_texture;
         protected Texture2D _was_hit_texture;
         protected List<Texture2D> _skill_texture;
-        //protected bool isAttacking;
         protected bool isDead;
         protected bool hasTarget;
         protected bool wasAttacked;
         protected bool isReachTarget;
+        protected bool isHealthCalculated;
+        protected bool isStaminaCalculated;
         protected List<Sprite> _targets;
         protected Character _mychar;
         #endregion
@@ -69,8 +70,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         }
 
         public Vector2 Position { get; set; }
-
-        //public Vector2 Position;
         
         public Sprite(ContentManager content, string hero_name, string uniform_name)
         {
@@ -116,16 +115,21 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             hasTarget = logic;
         }
 
+        public void Set_isHealth_Calculated(bool logic)
+        {
+            isHealthCalculated = logic;
+        }
+        
+        public void Set_isStamina_Calculated(bool logic)
+        {
+            isStaminaCalculated = logic;
+        }
+
         public void Set_IsFocus(bool logic)
         {
             isFocus = logic;
         }
-
-        /*public void Set_IsAttacking(bool logic)
-        {
-            isAttacking = logic;
-        }*/
-
+        
         public void Set_IsDead(bool logic)
         {
             isDead = logic;
@@ -148,6 +152,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             return this;
         }
 
+        public int Get_Cur_Frame()
+        {
+            return _cur_frame;
+        }
+
         public Character Get_Char()
         {
             return _mychar;
@@ -161,6 +170,16 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public bool Get_HasTarget()
         {
             return hasTarget;
+        }
+
+        public bool Get_isHealth_Calculated()
+        {
+            return isHealthCalculated;
+        }
+
+        public bool Get_isStamina_Calculated()
+        {
+            return isStaminaCalculated;
         }
 
         public List<Sprite> Get_Targets()
@@ -247,8 +266,8 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                     foreach (var target in _targets)
                     {
                         target.Set_WasAttacked(true);
-                        isReachTarget = true;
                     }
+                    isReachTarget = true;
                 }
             }
             #endregion
@@ -270,6 +289,14 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                 {
                     _cur_position = Position;
                     //ChangeTexture(_main_texture, 15, 4);
+                }
+                else
+                {
+                    _mychar.Check_Skill();
+                    Calculator engine = new Calculator();
+                    if (isReachTarget && isHealthCalculated) engine.HeathCalculate(this, _targets);
+                    if(isStaminaCalculated) engine.StaminaCalculate(this);
+                    isReachTarget = false;
                 }
 
                 if (isReachTarget)
@@ -324,7 +351,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #region Motion Fuction
         public void Transition(Vector2 initial, Vector2 final, int startframe, int number_of_frame)
         {
-            if (hasTarget && _cur_frame > startframe && _cur_frame < startframe + number_of_frame)
+            if (hasTarget && _cur_frame >= startframe && _cur_frame <= startframe + number_of_frame)
             {
                 _velocity.X = (final.X - initial.X) / number_of_frame;
                 _velocity.Y = (final.Y - initial.Y) / number_of_frame;

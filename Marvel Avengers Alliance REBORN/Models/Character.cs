@@ -39,14 +39,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         //public Vector2 Position { get; set; }
         #endregion
 
-        public abstract void Animating_Skill_1st();
-
-        public abstract void Animating_Skill_2nd();
-
-        public abstract void Animating_Skill_3rd();
-
-        public abstract void Animating_Skill_4th();
-
         #region Get Function
         public Sprite Get_Sprite()
         {
@@ -212,7 +204,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public void Skill_Action(ContentManager content)
         {
             _sprite.ChangeTexture(content.Load<Texture2D>("Character/" + name + "/" + alternate_uniform + "/" + "Sprite_" + _cur_skill.Get_Name()), 15, _cur_skill.Get_Time());
-            Check_Skill();
+            //Check_Skill();
         }
 
         public abstract void Check_Skill();

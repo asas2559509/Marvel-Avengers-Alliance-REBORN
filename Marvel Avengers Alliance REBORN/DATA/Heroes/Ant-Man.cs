@@ -89,60 +89,46 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         }
 
         #region Animation Editor
-        public override void Animating_Skill_1st()
-        {
-            Vector2 goal = new Vector2(Get_Sprite().Get_Targets()[0].Position.X - (Get_Sprite().Get_Targets()[0].Get_Sprite_Width() / 8), Get_Sprite().Get_Targets()[0].Position.Y);
-            Get_Sprite().Transition(Get_Sprite().Position, goal, 1, 20);
-            Get_Sprite().Transition(goal, Get_Sprite().Position, 50, 25);
-        }
-
-        public override void Animating_Skill_2nd()
-        {
-            Vector2 goal = new Vector2(Get_Sprite().Get_Targets()[0].Position.X - (Get_Sprite().Get_Targets()[0].Get_Sprite_Width() / 8), Get_Sprite().Get_Targets()[0].Position.Y);
-            Get_Sprite().Transition(Get_Sprite().Position, goal, 1, 20);
-            Get_Sprite().Transition(goal, Get_Sprite().Position, 50, 25);
-        }
-
-        public override void Animating_Skill_3rd()
-        {
-            Vector2 goal = new Vector2(Get_Sprite().Get_Targets()[0].Position.X - (Get_Sprite().Get_Targets()[0].Get_Sprite_Width() / 8), Get_Sprite().Get_Targets()[0].Position.Y);
-            Get_Sprite().Transition(Get_Sprite().Position, goal, 1, 20);
-            Get_Sprite().Transition(goal, Get_Sprite().Position, 50, 25);
-        }
-
-        public override void Animating_Skill_4th()
-        {
-            Vector2 goal = new Vector2(Get_Sprite().Get_Targets()[0].Position.X - (Get_Sprite().Get_Targets()[0].Get_Sprite_Width() / 8), Get_Sprite().Get_Targets()[0].Position.Y);
-            Get_Sprite().Transition(Get_Sprite().Position, goal, 1, 20);
-            Get_Sprite().Transition(goal, Get_Sprite().Position, 50, 25);
-        }
-        #endregion
-
         public override void Check_Skill()
         {
             switch (_cur_skill.Get_Name())
             {
                 case "Ant-Man-Break_In":
                     {
-                        Animating_Skill_1st();
+                        Vector2 goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 2) - 100, _sprite.Get_Targets()[0].Position.Y - 50);
+                        _sprite.Transition(_sprite.Position, goal, 11, 5);
+
+                        _sprite.Transition(goal, _sprite.Position, 36, 5);
+
+                        if (_sprite.Get_Cur_Frame() == 17) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                 case "Ant-Man-Greatest_Allies":
                     {
-                        Animating_Skill_2nd();
+                        Vector2 goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 2), _sprite.Get_Targets()[0].Position.Y);
+                        _sprite.Transition(_sprite.Position, goal, 1, 5);
+                        _sprite.Transition(goal, _sprite.Position, 50, 25);
                         break;
                     }
                 case "Ant-Man-Pint-Size_Surprise":
                     {
-                        Animating_Skill_3rd();
+                        Vector2 goal = new Vector2(_sprite.Get_Targets()[0].Position.X - _sprite.Get_Targets()[0].Get_Sprite_Width() / 2, _sprite.Get_Targets()[0].Position.Y);
+                        _sprite.Transition(_sprite.Position, goal, 1, 5);
+                        _sprite.Transition(goal, _sprite.Position, 50, 25);
                         break;
                     }
                 case "Ant-Man-Swarm_Cloud":
                     {
-                        Animating_Skill_4th();
+                        Vector2 goal = new Vector2(_sprite.Get_Targets()[0].Position.X - _sprite.Get_Targets()[0].Get_Sprite_Width() / 2, _sprite.Get_Targets()[0].Position.Y);
+                        _sprite.Transition(_sprite.Position, goal, 1, 5);
+                        _sprite.Transition(goal, _sprite.Position, 50, 25);
                         break;
                     }
             }
+            #endregion
         }
     }
 }

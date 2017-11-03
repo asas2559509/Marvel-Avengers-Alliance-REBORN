@@ -162,7 +162,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
         private void Char_was_Clicked(object sender, EventArgs e)
         {
-            //heroes[cur_turn].Set_Sprite_HasTarget(false);
+            heroes[cur_turn].Set_Sprite_HasTarget(false);
 
             if (!heroes[cur_turn].isPickSkill) return;
 
@@ -183,9 +183,9 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             }
             heroes[cur_turn].Set_Target(targets);
 
-            heroes[cur_turn].Skill_Action(Content);
-
             heroes[cur_turn].Set_Sprite_HasTarget(true);
+
+            heroes[cur_turn].Skill_Action(Content);
 
             heroes[cur_turn].isPickSkill = false;
         }
