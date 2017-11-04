@@ -96,7 +96,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Ant-Man-Break_In":
                     #region Skill Motion
                     {
-                        Vector2 goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 2) - 100, _sprite.Get_Targets()[0].Position.Y - 50);
+                        Vector2 goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 2) - 100, _sprite.Get_Targets()[0].Position.Y - 60);
                         _sprite.Transition(_sprite.Position, goal, 11, 5);
 
                         _sprite.Transition(goal, _sprite.Position, 35, 5);

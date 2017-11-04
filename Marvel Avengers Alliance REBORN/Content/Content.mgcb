@@ -2019,3 +2019,10 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Conso.spritefont
 
+#begin Fonts/Georg.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Georg.spritefont
+

@@ -154,6 +154,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         {
             if (heroes[cur_turn].Get_Sprite_HasTarget()) return;
             heroes[cur_turn].Set_Cur_Skill(((SkillButton)sender).Get_Skill());
+            if (heroes[cur_turn].Get_Cur_Skill() == null) return;
             Console.Out.WriteLine("Skill " + ((SkillButton)sender).Get_Skill().Get_Name()  + " of " + heroes[cur_turn].Get_Name() + " was Clicked");
             heroes[cur_turn].isPickSkill = true;
         }
@@ -219,7 +220,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             }
             
             foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())
-                btnskill.Update(gameTime);
+                btnskill.Update(gameTime, heroes[cur_turn]);
 
             foreach (var btn in menu_component)
                 btn.Update(gameTime);

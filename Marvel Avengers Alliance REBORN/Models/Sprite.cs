@@ -234,8 +234,8 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public void UpdateFrame(float elapsed)
         {
-            _Depth = ((Position.Y*(-1)) / 200) + 0.5f;
-            //if(_cur_frame % 60 == 29) Console.Out.WriteLine(Position.Y + "has Dept = " + _Depth);
+            _Depth = ((_cur_position.Y * (-1)) / 400) + 0.5f;
+            if(_cur_frame % 60 == 29) Console.Out.WriteLine(Position.Y + "has Dept = " + _Depth);
 
             #region Mouse Cast
             _previousMouse = _currentMouse;
@@ -277,7 +277,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             _TotalElapsed += elapsed;
 
             _cur_frame = (_frame_per_sec * _cur_row) + _cur_column + 1;
-            Console.Out.WriteLine(_cur_frame);
+            //Console.Out.WriteLine(_cur_frame);
 
             if (_TotalElapsed > _timePerFrame)
             {

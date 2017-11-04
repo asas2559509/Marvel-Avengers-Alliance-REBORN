@@ -14,17 +14,20 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
     class SkillButton : Button
     {
         private Skill _skill;
-        private Texture2D _skill_texture;
+        private bool isEnoughStamina;
+        private SpriteFont Georg;
+        public event EventHandler Click;
 
         public SkillButton(ContentManager content, string hero_name, string uniform_name, Skill skill)
         {
             _skill = skill;
             LoadContent(content,"Character/" + hero_name + "/" + uniform_name + "/" + skill.Get_Name());
-            _skill_texture = content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + "Sprite_" + skill.Get_Name());
+            Georg = content.Load<SpriteFont>("Fonts/Georg");
         }
 
         public Skill Get_Skill()
         {
+            if (_skill.Get_Cooldown()[0] > 0 || !isEnoughStamina) return null;
             return _skill;
         }
 
@@ -33,9 +36,57 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
             return this;
         }
 
-        public Texture2D Get_Skill_Texture()
+        public void Update(GameTime gameTime,Character hero)
         {
-            return _skill_texture;
+            if (hero.Get_Stamina() >= (_skill.Get_StaminaCost() * hero.Get_Max_Stamina() / 100)) isEnoughStamina = true;
+            else
+            {
+                isEnoughStamina = false;
+                return;
+            }
+
+            previousMouse = currentMouse;
+            currentMouse = Mouse.GetState();
+
+            var mouseRectangle = new Rectangle(currentMouse.X, currentMouse.Y, 1, 1);
+
+            isPointed = false;
+
+            if (mouseRectangle.Intersects(MarginRectangle))
+            {
+                isPointed = true;
+
+                if (currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
+                {
+                    Click?.Invoke(this, new EventArgs());
+                }
+            }
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            var color = Color.DarkGray;
+
+            if (isPointed)
+                color = Color.White;
+            
+            if (_skill.Get_Cooldown()[0] > 0)
+                color = Color.RoyalBlue;
+
+            if (!isEnoughStamina)
+                color = Color.Salmon;
+
+            spriteBatch.Draw(_texture, Rectangle,new Rectangle(0,0,_texture.Width,_texture.Height),color,0,Vector2.Zero,SpriteEffects.None,0.1f);
+            
+            if (!isEnoughStamina)
+            {
+                spriteBatch.DrawString(Georg, "     NO\r\nSTAMINA", new Vector2(Position.X + 4, Position.Y + 14), Color.White,0,Vector2.Zero,1,SpriteEffects.None,0);
+            }else
+
+            if (_skill.Get_Cooldown()[0] > 0 && isEnoughStamina)
+            {
+                spriteBatch.DrawString(Georg, "       " + _skill.Get_Cooldown()[0] + "\r\n ROUND", new Vector2(Position.X + 5, Position.Y + 12), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            }
         }
     }
 }

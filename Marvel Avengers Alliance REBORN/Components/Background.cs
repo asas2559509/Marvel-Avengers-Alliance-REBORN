@@ -32,7 +32,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
 
             //spriteBatch.Draw(_texture, Position, color);
             Rectangle source_rect = new Rectangle(0, 0, _texture.Width, _texture.Height);
-            spriteBatch.Draw(_texture, Position, source_rect, color, 0, Vector2.One,1f, SpriteEffects.None, 1);
+            spriteBatch.Draw(_texture, Position, source_rect, color, 0, Vector2.One,1f, SpriteEffects.None, 1f);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
