@@ -16,13 +16,13 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
+                return new Rectangle(0, 0, _texture.Width, _texture.Height);
             }
         }
 
-        public Icon(ContentManager content, string hero_name, string icon_name)
+        public Icon(ContentManager content, string hero_name, string uniform_name)
         {
-            LoadContent(content, hero_name +"/" + icon_name);
+            LoadContent(content, "Character/" + hero_name + "/" + uniform_name + "/" + hero_name + "_Icon");
         }
 
         public override void LoadContent(ContentManager content, string asset)
@@ -30,15 +30,21 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
             _texture = content.Load<Texture2D>(asset);
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch,float scale)
         {
             var color = Color.White;
-            spriteBatch.Draw(_texture, Rectangle, color);
+            //spriteBatch.Draw(_texture, Rectangle, color);
+            spriteBatch.Draw(_texture,Position,Rectangle,color,0,Vector2.Zero, scale, SpriteEffects.None,0);
         }
 
         public override void Update(GameTime gameTime)
         {
 
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             _texture = content.Load<Texture2D>(asset);
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             var color = Color.DarkGray;
 

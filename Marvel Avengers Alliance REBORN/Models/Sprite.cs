@@ -82,6 +82,9 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
             _main_texture = _cur_texture;
 
+            _frame_width = _cur_texture.Width / 15;
+            _frame_height = _cur_texture.Height / 4;
+
             _was_hit_texture = content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + (uniform_name + "_was_Hit"));
 
             /*for (int i = 1; i <= 4; i++)
@@ -96,7 +99,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             _time_cast = time_cast;
             _cur_column = 0;
             _cur_row = 0;
-           /* _frame_width = _cur_texture.Width / frame_per_sec;
+            /*_frame_width = _cur_texture.Width / frame_per_sec;
             _frame_height = _cur_texture.Height / time_cast;
             _timePerFrame = (float)1 / frame_per_sec;*/
             _cur_texture = texture;
@@ -235,7 +238,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public void UpdateFrame(float elapsed)
         {
             _Depth = ((_cur_position.Y * (-1)) / 400) + 0.5f;
-            if(_cur_frame % 60 == 29) Console.Out.WriteLine(Position.Y + "has Dept = " + _Depth);
+            //if(_cur_frame % 60 == 29) Console.Out.WriteLine(Position.Y + "has Dept = " + _Depth);
 
             #region Mouse Cast
             _previousMouse = _currentMouse;
@@ -256,7 +259,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             }
             #endregion
 
-            #region ReachTarget
+            /*#region ReachTarget
 
             isReachTarget = false;
 
@@ -269,7 +272,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                     isReachTarget = true;
                 }
             }
-            #endregion
+            #endregion*/
 
             if (_Paused)
                 return;
@@ -295,10 +298,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                     if (isHealthCalculated)
                     {
                         engine.HeathCalculate(this, _targets);
-                    }
-
-                    if (isReachTarget)
-                    {
                         foreach (var target in _targets)
                         {
                             target.ChangeTexture(_was_hit_texture, 1, 1);
@@ -306,7 +305,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                     }
                     
                     if(isStaminaCalculated) engine.StaminaCalculate(this);
-                    isReachTarget = false;
                 }
 
                 //Set Back Main

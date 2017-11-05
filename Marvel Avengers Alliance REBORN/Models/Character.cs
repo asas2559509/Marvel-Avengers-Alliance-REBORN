@@ -35,6 +35,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public bool isPickSkill = false;
         public StatusBar _hp_bar;
         public StatusBar _sp_bar;
+        public Icon _small_icon;
 
         //public Vector2 Position { get; set; }
         #endregion

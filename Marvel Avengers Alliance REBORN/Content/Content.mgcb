@@ -25,7 +25,7 @@
 /processorParam:TextureFormat=Color
 /build:Cards/Deadpool-Classic.png
 
-#begin Character/Ant-Man/Ant-Man-Modern/Ant-Man_Icon_1.png
+#begin Character/Ant-Man/Ant-Man-Modern/Ant-Man_Icon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,9 +35,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Character/Ant-Man/Ant-Man-Modern/Ant-Man_Icon_1.png
+/build:Character/Ant-Man/Ant-Man-Modern/Ant-Man_Icon.png
 
-#begin Character/Ant-Man/Ant-Man-Modern/Ant-Man_Icon_Large_1.png
+#begin Character/Ant-Man/Ant-Man-Modern/Ant-Man_Icon_Large.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -47,7 +47,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Character/Ant-Man/Ant-Man-Modern/Ant-Man_Icon_Large_1.png
+/build:Character/Ant-Man/Ant-Man-Modern/Ant-Man_Icon_Large.png
 
 #begin Character/Ant-Man/Ant-Man-Modern/Ant-Man-Break_In.png
 /importer:TextureImporter
@@ -1644,6 +1644,66 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Character/Hulk/Hulk-World_War/Hulk-Monster-Size_Thunder_Clap.png
+
+#begin Character/Hulk/Main.gif
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Hulk/Main.gif
+
+#begin Character/Hulk/skill_hulk_1.gif
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Hulk/skill_hulk_1.gif
+
+#begin Character/Hulk/skill_hulk_2.gif
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Hulk/skill_hulk_2.gif
+
+#begin Character/Hulk/skill_hulk_3.gif
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Hulk/skill_hulk_3.gif
+
+#begin Character/Hulk/skill_hulk_4.gif
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Hulk/skill_hulk_4.gif
 
 #begin Class/Blaster.png
 /importer:TextureImporter

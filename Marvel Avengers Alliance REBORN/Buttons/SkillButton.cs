@@ -23,6 +23,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
             _skill = skill;
             LoadContent(content,"Character/" + hero_name + "/" + uniform_name + "/" + skill.Get_Name());
             Georg = content.Load<SpriteFont>("Fonts/Georg");
+            isEnoughStamina = true;
         }
 
         public Skill Get_Skill()
@@ -36,7 +37,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
             return this;
         }
 
-        public void Update(GameTime gameTime,Character hero)
+        public void Update(Character hero)
         {
             if (hero.Get_Stamina() >= (_skill.Get_StaminaCost() * hero.Get_Max_Stamina() / 100)) isEnoughStamina = true;
             else
@@ -63,7 +64,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
             }
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             var color = Color.DarkGray;
 

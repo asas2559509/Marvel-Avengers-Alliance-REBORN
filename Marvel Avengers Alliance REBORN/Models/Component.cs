@@ -35,7 +35,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public abstract void LoadContent(ContentManager content, string asset);
 
-        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        public abstract void Draw(SpriteBatch spriteBatch);
 
         public abstract void Update(GameTime gameTime);
     }
