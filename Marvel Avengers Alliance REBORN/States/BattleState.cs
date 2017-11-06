@@ -224,7 +224,17 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 avatar._sp_bar.Update(gameTime);
             }
 
-            heroes[cur_turn]._small_icon.Update(gameTime);
+            //heroes[cur_turn]._small_icon.Update(gameTime);
+            int j = 1;
+            for(int i = cur_turn + 1; i != cur_turn; i++)
+            {
+                if (i >= heroes.Count) i = 0;
+                heroes[i]._small_icon.Position = new Vector2(295 + (j * 30), 6);
+                j++;
+                if (j == heroes.Count) break;
+            }
+
+            heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
 
             foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())
                 btnskill.Update(heroes[cur_turn]);

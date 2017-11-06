@@ -23,8 +23,8 @@ namespace Marvel_Avengers_Alliance_REBORN
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            /*graphics.PreferredBackBufferWidth = screen_width;
-            graphics.PreferredBackBufferHeight = screen_height;
+            /*graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
+            graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
             graphics.ApplyChanges();*/
         }
 
