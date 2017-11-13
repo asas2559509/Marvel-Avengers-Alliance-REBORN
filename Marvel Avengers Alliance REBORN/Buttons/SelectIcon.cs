@@ -8,29 +8,25 @@ using System.Threading.Tasks;
 
 namespace Marvel_Avengers_Alliance_REBORN.Buttons
 {
-    class Card : Button
+    class SelectIcon : Button
     {
         #region Field
-        private string card_name;
+        private string Icon_name;
         private string uniform_name;
 
-        private Character _hero;
         #endregion
 
-        public Card(ContentManager content, string uniform_name)
+        public SelectIcon(ContentManager content, string uniform_name)
         {
-            card_name = uniform_name;
-            LoadContent(content, "Cards/" + uniform_name);
+            Icon_name = uniform_name;
+            LoadContent(content, "Icon/" + uniform_name);
         }
 
-        public Character Get_Hero()
-        {
-            return _hero;
-        }
         public string Get_Name()
         {
-            return card_name;
+            return Icon_name;
         }
+
     }
 }
 

@@ -40,7 +40,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public override void LoadContent(ContentManager content, string asset)
         {
-            _texture = content.Load<Texture2D>(asset);
+           _texture = content.Load<Texture2D>(asset);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

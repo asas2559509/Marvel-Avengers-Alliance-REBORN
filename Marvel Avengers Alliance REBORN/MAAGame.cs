@@ -36,7 +36,7 @@ namespace Marvel_Avengers_Alliance_REBORN
         /// </summary>
         protected override void Initialize()
         {
-            base.Initialize();
+           base.Initialize();
         }
 
         /// <summary>

@@ -44,12 +44,14 @@
   <ItemGroup>
     <Compile Include="Buttons\Card.cs" />
     <Compile Include="Buttons\MenuButton.cs" />
+    <Compile Include="Buttons\SelectIcon.cs" />
     <Compile Include="Buttons\SkillButton.cs" />
     <Compile Include="Components\Background.cs" />
     <Compile Include="Components\Button.cs" />
     <Compile Include="Components\Icon.cs" />
     <Compile Include="Components\StatusBar.cs" />
     <Compile Include="DATA\BackgroundName.cs" />
+    <Compile Include="DATA\IconHeros.cs" />
     <Compile Include="DATA\Gadget.cs" />
     <Compile Include="DATA\Heroes\Ant-Man.cs" />
     <Compile Include="MAAGame.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprites\Sprite Ant-Man.cs" />
     <Compile Include="States\BattleState.cs" />
+    <Compile Include="States\SelectState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
