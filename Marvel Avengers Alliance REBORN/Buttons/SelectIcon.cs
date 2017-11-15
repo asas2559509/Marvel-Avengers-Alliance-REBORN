@@ -12,7 +12,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
     {
         #region Field
         private string Icon_name;
-        private string uniform_name;
 
         #endregion
 

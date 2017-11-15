@@ -176,7 +176,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 for(int i = 0; i < heroes.Count; i++)
                 {
-                    targets.Add(heroes[i].Get_Sprite());
+                    //targets.Add(heroes[i].Get_Sprite());
                     if (i % 2 == 1) heroes[cur_turn].Set_Target(targets);
                 }
             }

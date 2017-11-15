@@ -16,12 +16,12 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA
         public const string X23_Card = "X-23-Card";
         public const string GhostRider_Card = "GhostRider-Card";
 
-        public const string Deadpool_Icon = "Deadpool";
-        public const string AntMan_Icon = "Ant-Man";
-        public const string Hulk_Icon = "Hulk";
-        public const string Captain_Icon = "Captain";
-        public const string X23_Icon = "X-23";
-        public const string GhostRider_Icon = "GhostRider";
+        public const string Deadpool_Icon = "Deadpool_Icon";
+        public const string AntMan_Icon = "Ant-Man_Icon";
+        public const string Hulk_Icon = "Hulk_Icon";
+        public const string Captain_Icon = "Captain_Icon";
+        public const string X23_Icon = "X-23_Icon";
+        public const string GhostRider_Icon = "GhostRider_Icon";
 
         public const string Deadpool_Icon_Mon = "Mon-Deadpool";
         public const string AntMan_Icon_Mon = "Mon-Ant-Man";
@@ -34,6 +34,12 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA
         public const string Background_Icon1 = "Background-Icon1";
         public const string Background_Icon2 = "Background-Icon2";
         public const string Background_Icon3 = "Background-Icon3";
+
+        public const string Deadpool_Status = "Deadpool-Status";
+        public const string Ant_Man_Status = "Ant-Man-Status";
+        public const string Hulk_Status = "Hulk-Status";
+        public const string Captain_Status = "Captain-Status";
+        public const string X_23_Status = "X-23-Status";
 
 
         #endregion
